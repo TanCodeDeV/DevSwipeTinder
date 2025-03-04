@@ -61,7 +61,7 @@ const Login = () => {
       })
     );
 
-    console.log("User after Login:", userLogin);
+    //console.log("User after Login:", userLogin);
 
     navigate("/");
   };
