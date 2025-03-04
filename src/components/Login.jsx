@@ -15,6 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState("tomtt@234");
   const [name, setName] = useState("");
   const [isSignIn, setIsSignIn] = useState(false);
+  const [errorMsg, SetErrorMsg] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toggleSignForm = () => {
@@ -46,24 +47,29 @@ const Login = () => {
   };
 
   const handleSignIn = async () => {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      emailid,
-      password
-    );
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        emailid,
+        password
+      );
 
-    const userLogin = userCredential.user; // Get user from userCredential
-    dispatch(
-      addUser({
-        uid: userLogin.uid,
-        email: userLogin.email,
-        displayName: userLogin.displayName,
-      })
-    );
+      const userLogin = userCredential.user; // Get user from userCredential
+      dispatch(
+        addUser({
+          uid: userLogin.uid,
+          email: userLogin.email,
+          displayName: userLogin.displayName,
+        })
+      );
 
-    //console.log("User after Login:", userLogin);
+      //console.log("User after Login:", userLogin);
 
-    navigate("/");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      SetErrorMsg(error);
+    }
   };
 
   return (
@@ -112,6 +118,7 @@ const Login = () => {
                 : "New to Netflix? Sign up now"}
             </p>
           </div>
+          {errorMsg && <p className="text-red-500">{"Error:  " + errorMsg}</p>}
           <div className="card-actions mt-1">
             <button
               onClick={isSignIn ? handleRegister : handleSignIn}
