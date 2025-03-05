@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GITHUB_USER_API } from "../utils/constants";
 import useLogout from "../utils/hooks/useLogout";
 import { Link } from "react-router";
+import { addActualUser } from "../utils/slices/actualUserSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
   const [data, setData] = useState(null);
   const logout = useLogout(); // Get the logout function
+  const disptach = useDispatch();
 
   const getUserDetails = async () => {
     const data = await fetch(GITHUB_USER_API + user.displayName);
@@ -15,6 +17,7 @@ const Navbar = () => {
     ////console.log("gecth from github");
     //console.log(jsonData);
     setData(jsonData);
+    disptach(addActualUser(jsonData));
   };
 
   useEffect(() => {

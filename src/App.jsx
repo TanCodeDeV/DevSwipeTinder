@@ -7,6 +7,7 @@ import Connections from "./components/Connections";
 import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 import ProtectedRoute from "./ProtectedRoute";
+import ShowProfile from "./components/ShowProfile";
 
 function App() {
   return (

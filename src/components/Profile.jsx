@@ -1,9 +1,16 @@
-import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import EditProfile from "./EditProfile";
 
 const Profile = () => {
-  <div>Profile page</div>;
+  const actualUser = useSelector((store) => store.actualUser);
+  return (
+    actualUser && (
+      <div>
+        <h1>Hello profile</h1>
+        <EditProfile user={actualUser} />
+      </div>
+    )
+  );
 };
 
 export default Profile;

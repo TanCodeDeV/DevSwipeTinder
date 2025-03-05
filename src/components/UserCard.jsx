@@ -43,7 +43,7 @@ const UserCard = ({ user }) => {
             <p className="text-pink-500 font-serif font-semibold">
               Location: {data.location}
             </p>
-            <Link to={data.blog} className=" font-semibold">
+            <Link to={data.blog} target="_blank" className=" font-semibold">
               Read my blog: {data.blog}
             </Link>
             <div className="flex justify-center">
