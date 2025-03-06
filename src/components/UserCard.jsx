@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { GITHUB_USER_API } from "../utils/constants";
 import { Link } from "react-router";
+import { GITHUB_HEADERS } from "../utils/apiHeaders";
 
 const UserCard = ({ user }) => {
-  console.log("userCard");
-  console.log(user);
-
-  const userID = user.login;
-  console.log(userID);
   const [data, setData] = useState(null);
 
   const getUserDetails = async () => {
-    const data = await fetch(GITHUB_USER_API + user.login);
+    const data = await fetch(GITHUB_USER_API + user.login, {
+      headers: GITHUB_HEADERS,
+    });
     const jsonData = await data.json();
-    ////console.log("gecth from github");
-    //console.log(jsonData);
     setData(jsonData);
   };
 
@@ -24,7 +20,7 @@ const UserCard = ({ user }) => {
   return (
     user &&
     data && (
-      <div className="flex justify-center my-5">
+      <div className="flex justify-center my-5 m-2 p-2">
         <div className="card bg-base-300 w-96 shadow-sm">
           <figure>
             <img src={data.avatar_url} alt="Shoes" />

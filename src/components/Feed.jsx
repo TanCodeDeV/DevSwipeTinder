@@ -3,16 +3,18 @@ import { GITHUB_Feed_USER_API, GITHUB_USER_API } from "../utils/constants";
 import UserCard from "./UserCard";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/slices/feedSlice";
+import { GITHUB_HEADERS } from "../utils/apiHeaders";
 
 const Feed = () => {
   const disptach = useDispatch();
   const feed = useSelector((store) => store.feed);
 
   const getFeedData = async () => {
-    const data = await fetch(GITHUB_Feed_USER_API);
+    const data = await fetch(GITHUB_Feed_USER_API, {
+      headers: GITHUB_HEADERS,
+    });
     const jsonData = await data.json();
     disptach(addFeed(jsonData));
-    console.log(jsonData);
   };
   useEffect(() => {
     getFeedData();

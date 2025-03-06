@@ -4,6 +4,7 @@ import { GITHUB_USER_API } from "../utils/constants";
 import useLogout from "../utils/hooks/useLogout";
 import { Link } from "react-router";
 import { addActualUser } from "../utils/slices/actualUserSlice";
+import { GITHUB_HEADERS } from "../utils/apiHeaders";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
@@ -12,10 +13,10 @@ const Navbar = () => {
   const disptach = useDispatch();
 
   const getUserDetails = async () => {
-    const data = await fetch(GITHUB_USER_API + user.displayName);
+    const data = await fetch(GITHUB_USER_API + user.displayName, {
+      headers: GITHUB_HEADERS,
+    });
     const jsonData = await data.json();
-    ////console.log("gecth from github");
-    //console.log(jsonData);
     setData(jsonData);
     disptach(addActualUser(jsonData));
   };

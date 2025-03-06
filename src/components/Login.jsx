@@ -34,7 +34,6 @@ const Login = () => {
       );
 
       const user = userCredential.user; // Get user from userCredential
-      //console.log("User after registration:", user);
 
       await updateProfile(user, {
         displayName: name,
@@ -42,7 +41,7 @@ const Login = () => {
 
       dispatch(addUser(user));
     } catch (error) {
-      //console.log("Error:", error.message);
+      console.log("Error:", error.message);
     }
   };
 
@@ -62,8 +61,6 @@ const Login = () => {
           displayName: userLogin.displayName,
         })
       );
-
-      //console.log("User after Login:", userLogin);
 
       navigate("/");
     } catch (error) {

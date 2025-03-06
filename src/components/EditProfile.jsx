@@ -90,7 +90,7 @@ const EditProfile = ({ user }) => {
         </div>
       </div>
       <div>
-        <UserCard user={{ name, followers, repos, location, blog, url }} />
+        <UserCard user={user} />
       </div>
     </div>
   );
